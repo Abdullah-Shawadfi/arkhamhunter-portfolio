@@ -1,4 +1,4 @@
-﻿import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, Shield, Target, AlertCircle, Code2, BookOpen } from "lucide-react";
@@ -118,15 +118,12 @@ export default function Home() {
     { name: "TryHackMe SOC Level 1 Learning Path", status: "Certified" },
     { name: "eCIR (Certified Incident Responder)", status: "Self-Study" },
     { name: "MCSA (Microsoft Certified Solutions Associate)", status: "Self-Study" },
-    { name: "SANS Institute SEC450 â€“ Blue Team Fundamentals", status: "Self-Study" },
-    { name: "SANS Institute SEC504H â€“ Incident Response & Threat Hunting", status: "Self-Study" },
+    { name: "SANS Institute SEC450 – Blue Team Fundamentals", status: "Self-Study" },
+    { name: "SANS Institute SEC504H – Incident Response & Threat Hunting", status: "Self-Study" },
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      
-        
-      
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
         <div className="container flex items-center justify-between h-16">
@@ -395,14 +392,15 @@ export default function Home() {
               <h2 className="text-4xl font-bold font-mono">
                 <span className="text-primary">&gt; </span>Medium Write-ups
               </h2>
-            <Button 
-              variant="outline" 
-              className="border-primary text-primary hover:bg-primary/10 font-mono text-xs"
-              onClick={() => window.open("https://medium.com/@abdullmst", "_blank")}
-            >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              View All
-            </Button>
+              <Button 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary/10 font-mono text-xs"
+                onClick={() => window.open("https://medium.com/@abdullmst", "_blank")}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                View All
+              </Button>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -556,7 +554,7 @@ export default function Home() {
         
         <div className="container text-center text-sm text-muted-foreground font-mono relative z-10">
           <p>&copy; 2026 ArkhamHunter. All Rights Reserved.</p>
-          <p className="mt-2">Crafted with <span className="text-accent">â–ˆ</span> for cybersecurity excellence</p>
+          <p className="mt-2">Crafted with <span className="text-accent">█</span> for cybersecurity excellence</p>
         </div>
       </footer>
     </div>
