@@ -13,20 +13,20 @@ interface WriteUp {
 }
 
 const TypingText = ({ text }: { text: string }) => {
-  const characters = Array.from(text);
+  const words = text.split(" ");
   
   const container = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
+      transition: { staggerChildren: 0.1, delayChildren: 0.04 * i },
     }),
   };
 
   const child = {
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
         type: "spring",
         damping: 12,
@@ -35,7 +35,7 @@ const TypingText = ({ text }: { text: string }) => {
     },
     hidden: {
       opacity: 0,
-      x: 20,
+      y: 10,
       transition: {
         type: "spring",
         damping: 12,
@@ -46,20 +46,26 @@ const TypingText = ({ text }: { text: string }) => {
 
   return (
     <motion.div
-      style={{ display: "flex", overflow: "hidden" }}
       variants={container}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="mb-4 border-l-4 border-accent pl-4 flex-wrap"
+      className="mb-6 border-l-4 border-accent pl-4 flex flex-wrap gap-x-2 gap-y-1"
     >
-      {characters.map((char, index) => (
+      {words.map((word, wordIndex) => (
         <motion.span
-          variants={child}
-          key={index}
-          className="text-accent font-mono italic text-lg md:text-xl"
+          key={wordIndex}
+          className="inline-flex"
         >
-          {char === " " ? "\u00A0" : char}
+          {Array.from(word).map((char, charIndex) => (
+            <motion.span
+              variants={child}
+              key={charIndex}
+              className="text-accent font-mono italic text-lg md:text-2xl"
+            >
+              {char}
+            </motion.span>
+          ))}
         </motion.span>
       ))}
     </motion.div>
@@ -67,65 +73,26 @@ const TypingText = ({ text }: { text: string }) => {
 };
 
 export default function Home() {
-  const [writeUps, setWriteUps] = useState<WriteUp[]>([]);
-  const [loadingWriteUps, setLoadingWriteUps] = useState(true);
-
-  useEffect(() => {
-    async function fetchWriteUps() {
-      try {
-        // First try to fetch via the internal API proxy
-        const response = await fetch("/api/medium-feed");
-        if (!response.ok) throw new Error("Internal proxy failed");
-        
-        const xmlText = await response.text();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        const items = xmlDoc.querySelectorAll("item");
-        
-        if (items.length === 0) throw new Error("No items found");
-
-        const fetchedWriteUps: WriteUp[] = Array.from(items).slice(0, 3).map(item => {
-          const content = item.querySelector("content\\:encoded")?.textContent || "";
-          const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-          return {
-            title: item.querySelector("title")?.textContent || "",
-            link: item.querySelector("link")?.textContent || "",
-            pubDate: new Date(item.querySelector("pubDate")?.textContent || "").toLocaleDateString(),
-            thumbnail: imgMatch ? imgMatch[1] : "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
-          };
-        });
-        
-        setWriteUps(fetchedWriteUps);
-      } catch (error) {
-        console.error("Error fetching write-ups, trying fallback:", error);
-        // Fallback to static cards if the API fails during development/deployment
-        setWriteUps([
-          {
-            title: "Analyzing Malicious Network Traffic: A Wireshark Deep Dive",
-            link: "https://medium.com/@abdullmst",
-            pubDate: "May 2026",
-            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
-          },
-          {
-            title: "Incident Response: Investigating Windows Lateral Movement",
-            link: "https://medium.com/@abdullmst",
-            pubDate: "May 2026",
-            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
-          },
-          {
-            title: "Threat Hunting with Splunk: Detecting Brute Force Attacks",
-            link: "https://medium.com/@abdullmst",
-            pubDate: "May 2026",
-            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
-          }
-        ]);
-      } finally {
-        setLoadingWriteUps(false);
-      }
+  const [writeUps, setWriteUps] = useState<WriteUp[]>([
+    {
+      title: "CyberHaze - Phishing Investigation: Wallet Verification Scam",
+      link: "https://medium.com/@abdullmst/cyberhaze-phishing-investigation-wallet-verification-scam-6b8e5bbb92e3",
+      pubDate: "May 2026",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
+    },
+    {
+      title: "CyberHaze - Shadow RAT Investigation",
+      link: "https://medium.com/@abdullmst/cyberhaze-shadow-rat-eb379c5abadc",
+      pubDate: "May 2026",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
+    },
+    {
+      title: "CyberHaze - OSINT & MITRE ATT&CK Framework Part 2",
+      link: "https://medium.com/@abdullmst/cyberhaze-osint-mitre-2-b56bd7467e9c",
+      pubDate: "May 2026",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
     }
-
-    fetchWriteUps();
-  }, []);
+  ]);
 
   const skills = {
     "Security & SOC Tools": ["IBM QRadar", "Splunk", "Wireshark", "MISP"],
@@ -393,50 +360,38 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loadingWriteUps ? (
-              Array.from({ length: 3 }).map((_, i) => (
-                <Card key={i} className="bg-card border-border overflow-hidden animate-pulse">
-                  <div className="aspect-video bg-muted"></div>
-                  <div className="p-4 space-y-3">
-                    <div className="h-4 bg-muted rounded w-3/4"></div>
-                    <div className="h-3 bg-muted rounded w-1/2"></div>
+            {writeUps.map((writeUp, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Card 
+                  className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all group cursor-pointer h-full flex flex-col"
+                  onClick={() => window.open(writeUp.link, "_blank")}
+                >
+                  <div className="aspect-video relative overflow-hidden">
+                    <img 
+                      src={writeUp.thumbnail} 
+                      alt={writeUp.title}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <BookOpen className="w-8 h-8 text-primary" />
+                    </div>
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="text-xs font-mono text-accent mb-2">{writeUp.pubDate}</div>
+                    <h3 className="font-mono font-bold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-4">
+                      {writeUp.title}
+                    </h3>
+                    <div className="mt-auto flex items-center text-xs text-primary font-mono">
+                      Read More <ExternalLink className="w-3 h-3 ml-1" />
+                    </div>
                   </div>
                 </Card>
-              ))
-            ) : (
-              writeUps.map((writeUp, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Card 
-                    className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all group cursor-pointer h-full flex flex-col"
-                    onClick={() => window.open(writeUp.link, "_blank")}
-                  >
-                    <div className="aspect-video relative overflow-hidden">
-                      <img 
-                        src={writeUp.thumbnail} 
-                        alt={writeUp.title}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <BookOpen className="w-8 h-8 text-primary" />
-                      </div>
-                    </div>
-                    <div className="p-4 flex-1 flex flex-col">
-                      <div className="text-xs font-mono text-accent mb-2">{writeUp.pubDate}</div>
-                      <h3 className="font-mono font-bold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-4">
-                        {writeUp.title}
-                      </h3>
-                      <div className="mt-auto flex items-center text-xs text-primary font-mono">
-                        Read More <ExternalLink className="w-3 h-3 ml-1" />
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))
-            )}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
