@@ -159,6 +159,17 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="mb-4 border-l-4 border-accent pl-4"
+            >
+              <p className="text-accent font-mono italic text-lg md:text-xl">
+                "Every alert hides a story worth investigating"
+              </p>
+            </motion.div>
+            
             <div className="inline-block mb-4 px-2 py-0.5 bg-secondary border border-primary rounded-full">
               <span className="text-xs font-mono text-primary">SOC Analyst | Cybersecurity Trainee</span>
             </div>
@@ -316,31 +327,18 @@ export default function Home() {
       {/* Write-ups Section */}
       <section id="writeups" className="py-20 border-t border-border relative">
         <div className="container relative z-10">
-          <div className="mb-12">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className="mb-4 border-l-4 border-accent pl-4"
+          <div className="mb-12 flex items-center justify-between">
+            <h2 className="text-4xl font-bold font-mono">
+              <span className="text-primary">&gt; </span>Medium Write-ups
+            </h2>
+            <Button 
+              variant="outline" 
+              className="border-primary text-primary hover:bg-primary/10 font-mono text-xs"
+              onClick={() => window.open("https://medium.com/@abdullmst", "_blank")}
             >
-              <p className="text-accent font-mono italic text-xl">
-                "Every alert hides a story worth investigating"
-              </p>
-            </motion.div>
-            <div className="flex items-center justify-between">
-              <h2 className="text-4xl font-bold font-mono">
-                <span className="text-primary">&gt; </span>Medium Write-ups
-              </h2>
-              <Button 
-                variant="outline" 
-                className="border-primary text-primary hover:bg-primary/10 font-mono text-xs"
-                onClick={() => window.open("https://medium.com/@abdullmst", "_blank")}
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                View All
-              </Button>
-            </div>
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View All
+            </Button>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
