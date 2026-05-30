@@ -12,20 +12,78 @@ interface WriteUp {
   thumbnail: string;
 }
 
+const TypingText = ({ text }: { text: string }) => {
+  const characters = Array.from(text);
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      x: 20,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      style={{ display: "flex", overflow: "hidden" }}
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="mb-4 border-l-4 border-accent pl-4 flex-wrap"
+    >
+      {characters.map((char, index) => (
+        <motion.span
+          variants={child}
+          key={index}
+          className="text-accent font-mono italic text-lg md:text-xl"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
 export default function Home() {
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [writeUps, setWriteUps] = useState<WriteUp[]>([]);
   const [loadingWriteUps, setLoadingWriteUps] = useState(true);
 
   useEffect(() => {
     async function fetchWriteUps() {
       try {
+        // First try to fetch via the internal API proxy
         const response = await fetch("/api/medium-feed");
+        if (!response.ok) throw new Error("Internal proxy failed");
+        
         const xmlText = await response.text();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         const items = xmlDoc.querySelectorAll("item");
         
+        if (items.length === 0) throw new Error("No items found");
+
         const fetchedWriteUps: WriteUp[] = Array.from(items).slice(0, 3).map(item => {
           const content = item.querySelector("content\\:encoded")?.textContent || "";
           const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
@@ -39,7 +97,28 @@ export default function Home() {
         
         setWriteUps(fetchedWriteUps);
       } catch (error) {
-        console.error("Error fetching write-ups:", error);
+        console.error("Error fetching write-ups, trying fallback:", error);
+        // Fallback to static cards if the API fails during development/deployment
+        setWriteUps([
+          {
+            title: "Analyzing Malicious Network Traffic: A Wireshark Deep Dive",
+            link: "https://medium.com/@abdullmst",
+            pubDate: "May 2026",
+            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
+          },
+          {
+            title: "Incident Response: Investigating Windows Lateral Movement",
+            link: "https://medium.com/@abdullmst",
+            pubDate: "May 2026",
+            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
+          },
+          {
+            title: "Threat Hunting with Splunk: Detecting Brute Force Attacks",
+            link: "https://medium.com/@abdullmst",
+            pubDate: "May 2026",
+            thumbnail: "https://miro.medium.com/v2/resize:fill:320:214/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
+          }
+        ]);
       } finally {
         setLoadingWriteUps(false);
       }
@@ -49,29 +128,10 @@ export default function Home() {
   }, []);
 
   const skills = {
-    "Security & SOC Tools": [
-      "IBM QRadar",
-      "Splunk",
-      "Wireshark",
-      "MISP",
-    ],
-    "Operating Systems": [
-      "Windows Server 2019",
-      "Active Directory",
-      "Linux",
-      "PowerShell",
-    ],
-    "Networking & Security": [
-      "TCP/IP",
-      "Network Analysis",
-      "Incident Response",
-      "Threat Intelligence",
-    ],
-    "Programming": [
-      "Python",
-      "PowerShell",
-      "Bash",
-    ],
+    "Security & SOC Tools": ["IBM QRadar", "Splunk", "Wireshark", "MISP"],
+    "Operating Systems": ["Windows Server 2019", "Active Directory", "Linux", "PowerShell"],
+    "Networking & Security": ["TCP/IP", "Network Analysis", "Incident Response", "Threat Intelligence"],
+    "Programming": ["Python", "PowerShell", "Bash"],
   };
 
   const projects = [
@@ -159,16 +219,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="mb-4 border-l-4 border-accent pl-4"
-            >
-              <p className="text-accent font-mono italic text-lg md:text-xl">
-                "Every alert hides a story worth investigating"
-              </p>
-            </motion.div>
+            <TypingText text="Every alert hides a story worth investigating" />
             
             <div className="inline-block mb-4 px-2 py-0.5 bg-secondary border border-primary rounded-full">
               <span className="text-xs font-mono text-primary">SOC Analyst | Cybersecurity Trainee</span>
