@@ -141,18 +141,16 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with Bat Signal Background */}
+      {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        {/* Bat Signal Background */}
         <div className="absolute inset-0 opacity-15">
           <img 
-            src="https://miro.medium.com/v2/resize:fill:1200:600/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
             alt="Bat Signal"
             className="w-full h-full object-cover grayscale opacity-30"
           />
         </div>
         
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40"></div>
         
         <div className="container relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -164,7 +162,7 @@ export default function Home() {
             <div className="inline-block mb-4 px-2 py-0.5 bg-secondary border border-primary rounded-full">
               <span className="text-xs font-mono text-primary">SOC Analyst | Cybersecurity Trainee</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 font-mono">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono">
               <span className="text-primary">ArkhamHunter</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -197,7 +195,7 @@ export default function Home() {
           >
             <div className="aspect-square rounded-lg overflow-hidden border-2 border-primary/50 shadow-2xl flex items-center justify-center bg-black group">
               <img 
-                src="https://miro.medium.com/v2/resize:fill:400:400/1*xuP0Ch12kQPEOvldLHIV8A.jpeg"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
                 alt="Batman Profile"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -207,16 +205,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section with Bat Signal Accent */}
+      {/* About Section */}
       <section id="about" className="py-20 border-t border-border relative">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-96 h-96 object-cover"
-          />
-        </div>
-        
         <div className="container relative z-10">
           <h2 className="text-4xl font-bold mb-12 font-mono">
             <span className="text-primary">&gt; </span>About Me
@@ -262,14 +252,6 @@ export default function Home() {
 
       {/* Skills Section */}
       <section id="skills" className="py-20 border-t border-border relative">
-        <div className="absolute left-0 top-0 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-80 h-80 object-cover"
-          />
-        </div>
-        
         <div className="container relative z-10">
           <h2 className="text-4xl font-bold mb-12 font-mono">
             <span className="text-primary">&gt; </span>Technical Skills
@@ -292,16 +274,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section with Bat Signal Watermark */}
+      {/* Projects Section */}
       <section id="projects" className="py-20 border-t border-border relative">
-        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-96 h-96 object-cover"
-          />
-        </div>
-        
         <div className="container relative z-10">
           <h2 className="text-4xl font-bold mb-12 font-mono">
             <span className="text-primary">&gt; </span>SOC Projects
@@ -316,46 +290,19 @@ export default function Home() {
               >
                 <Card 
                   className="bg-card border-border p-6 cursor-pointer hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/10"
-                  onClick={() => project.github ? window.open(project.github, "_blank") : setExpandedProject(expandedProject === idx ? null : idx)}
+                  onClick={() => window.open(project.github, "_blank")}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <h3 className="font-mono font-bold text-lg mb-2 text-primary">{project.title}</h3>
                       <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-                      
-                      <AnimatePresence>
-                        {expandedProject === idx && (
-                          <motion.div 
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="mt-4 pt-4 border-t border-border space-y-3">
-                              <div>
-                                <h4 className="text-xs font-mono text-accent mb-2">TECHNIQUES USED</h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {project.techniques.map((tech) => (
-                                    <Badge key={tech} variant="outline" className="border-accent/50 text-accent">
-                                      {tech}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                              <div>
-                                <h4 className="text-xs font-mono text-accent mb-2">MITRE ATT&CK MAPPING</h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {project.mitre.map((technique) => (
-                                    <Badge key={technique} className="bg-accent/20 border-accent/50 text-accent">
-                                      {technique}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      <div className="flex flex-wrap gap-2">
+                        {project.techniques.map((tech) => (
+                          <Badge key={tech} variant="outline" className="border-accent/50 text-accent text-[10px]">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                     <ExternalLink className="w-5 h-5 text-primary/50 flex-shrink-0 ml-4" />
                   </div>
@@ -368,23 +315,16 @@ export default function Home() {
 
       {/* Write-ups Section */}
       <section id="writeups" className="py-20 border-t border-border relative">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-80 h-80 object-cover"
-          />
-        </div>
-        
         <div className="container relative z-10">
           <div className="mb-12">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="mb-4"
+              className="mb-4 border-l-4 border-accent pl-4"
             >
-              <p className="text-accent font-mono italic text-lg">
+              <p className="text-accent font-mono italic text-xl">
                 "Every alert hides a story worth investigating"
               </p>
             </motion.div>
@@ -416,28 +356,36 @@ export default function Home() {
               ))
             ) : (
               writeUps.map((writeUp, idx) => (
-                <Card 
-                  key={idx} 
-                  className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all group cursor-pointer"
-                  onClick={() => window.open(writeUp.link, "_blank")}
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="aspect-video relative overflow-hidden">
-                    <img 
-                      src={writeUp.thumbnail} 
-                      alt={writeUp.title}
-                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <BookOpen className="w-8 h-8 text-primary" />
+                  <Card 
+                    className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all group cursor-pointer h-full flex flex-col"
+                    onClick={() => window.open(writeUp.link, "_blank")}
+                  >
+                    <div className="aspect-video relative overflow-hidden">
+                      <img 
+                        src={writeUp.thumbnail} 
+                        alt={writeUp.title}
+                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <BookOpen className="w-8 h-8 text-primary" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="text-xs font-mono text-accent mb-2">{writeUp.pubDate}</div>
-                    <h3 className="font-mono font-bold text-sm line-clamp-2 group-hover:text-primary transition-colors">
-                      {writeUp.title}
-                    </h3>
-                  </div>
-                </Card>
+                    <div className="p-4 flex-1 flex flex-col">
+                      <div className="text-xs font-mono text-accent mb-2">{writeUp.pubDate}</div>
+                      <h3 className="font-mono font-bold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-4">
+                        {writeUp.title}
+                      </h3>
+                      <div className="mt-auto flex items-center text-xs text-primary font-mono">
+                        Read More <ExternalLink className="w-3 h-3 ml-1" />
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
               ))
             )}
           </div>
@@ -451,107 +399,57 @@ export default function Home() {
             <span className="text-primary">&gt; </span>Certifications & Training
           </h2>
           
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {certifications.map((cert, idx) => (
-              <Card key={idx} className="bg-card border-border p-4 flex items-center justify-between">
-                <span className="font-mono text-sm">{cert.name}</span>
-                <Badge 
-                  variant={cert.status === "Certified" ? "default" : "secondary"}
-                  className={cert.status === "Certified" ? "bg-accent text-accent-foreground" : ""}
-                >
-                  {cert.status}
-                </Badge>
-              </Card>
+              <motion.div key={idx} whileHover={{ scale: 1.02 }}>
+                <Card className="bg-card border-border p-4 flex items-center justify-between h-full">
+                  <span className="font-mono text-xs">{cert.name}</span>
+                  <Badge 
+                    variant={cert.status === "Certified" ? "default" : "secondary"}
+                    className={cert.status === "Certified" ? "bg-accent text-accent-foreground text-[10px]" : "text-[10px]"}
+                  >
+                    {cert.status}
+                  </Badge>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="py-20 border-t border-border relative">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-80 h-80 object-cover"
-          />
-        </div>
-        
-        <div className="container relative z-10">
-          <h2 className="text-4xl font-bold mb-12 font-mono">
-            <span className="text-primary">&gt; </span>Hands-On Experience
-          </h2>
-          
-          <div className="space-y-6">
-            {[
-              { name: "TryHackMe", description: "SOC Level 1 path with hands-on experience in SIEM investigations, log analysis, threat hunting, and incident response" },
-              { name: "CyberDefenders", description: "Multiple DFIR and Blue Team labs involving malware analysis, PCAP analysis, IOC extraction, and attack investigations" },
-              { name: "LetsDefend", description: "SOC alert triage and investigation of simulated incidents in Windows environments" },
-              { name: "CyberHaze", description: "Practical blue team labs simulating real-world cyber attacks, email investigation, network forensics, and threat intelligence extraction" },
-              { name: "Hack The Box", description: "Hands-on cybersecurity labs focused on networking, system analysis, and security concepts" },
-            ].map((exp, idx) => (
-              <Card key={idx} className="bg-card border-border p-6">
-                <h3 className="font-mono font-bold text-accent mb-2">{exp.name}</h3>
-                <p className="text-muted-foreground text-sm">{exp.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section with Bat Signal Background */}
+      {/* Contact Section */}
       <section id="contact" className="py-20 border-t border-border relative">
-        <div className="absolute inset-0 opacity-10">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
         <div className="container relative z-10">
           <h2 className="text-4xl font-bold mb-12 font-mono">
             <span className="text-primary">&gt; </span>Get In Touch
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Card className="bg-card border-border p-8 text-center hover:border-primary/50 transition-colors h-full">
-                <Mail className="w-8 h-8 text-accent mx-auto mb-4" />
-                <h3 className="font-mono font-bold mb-2">Email</h3>
-                <p className="text-sm text-muted-foreground break-all">abdullmst@gmail.com</p>
-              </Card>
-            </motion.div>
-            
-            <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Card className="bg-card border-border p-8 text-center hover:border-primary/50 transition-colors h-full">
-                <Linkedin className="w-8 h-8 text-accent mx-auto mb-4" />
-                <h3 className="font-mono font-bold mb-2">LinkedIn</h3>
-                <p className="text-sm text-muted-foreground">linkedin.com/in/abdullah-mohammed-124993285</p>
-              </Card>
-            </motion.div>
-            
-            <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Card className="bg-card border-border p-8 text-center hover:border-primary/50 transition-colors h-full">
-                <Github className="w-8 h-8 text-accent mx-auto mb-4" />
-                <h3 className="font-mono font-bold mb-2">GitHub</h3>
-                <p className="text-sm text-muted-foreground">github.com/Abdullah-Shawadfi</p>
-              </Card>
-            </motion.div>
+            {[
+              { icon: Mail, title: "Email", value: "abdullmst@gmail.com", link: "mailto:abdullmst@gmail.com" },
+              { icon: Linkedin, title: "LinkedIn", value: "Connect on LinkedIn", link: "https://linkedin.com/in/abdullah-mohammed-124993285" },
+              { icon: Github, title: "GitHub", value: "Follow on GitHub", link: "https://github.com/Abdullah-Shawadfi" }
+            ].map((contact, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ scale: 1.05, y: -5 }} 
+                transition={{ type: "spring", stiffness: 400 }}
+                onClick={() => window.open(contact.link, "_blank")}
+                className="cursor-pointer"
+              >
+                <Card className="bg-card border-border p-8 text-center hover:border-primary/50 transition-colors h-full group">
+                  <contact.icon className="w-8 h-8 text-accent mx-auto mb-4 group-hover:text-primary transition-colors" />
+                  <h3 className="font-mono font-bold mb-2">{contact.title}</h3>
+                  <p className="text-sm text-muted-foreground break-all">{contact.value}</p>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-border py-8 relative">
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <img 
-            src="/manus-storage/batsign_d8062f79.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
         <div className="container text-center text-sm text-muted-foreground font-mono relative z-10">
           <p>&copy; 2026 ArkhamHunter. All Rights Reserved.</p>
           <p className="mt-2">Crafted with <span className="text-accent">█</span> for cybersecurity excellence</p>
