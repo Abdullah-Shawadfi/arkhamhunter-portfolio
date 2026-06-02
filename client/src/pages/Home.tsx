@@ -137,6 +137,13 @@ export default function Home() {
       mitre: ["T1110", "T1110.001"],
       github: "https://github.com/Abdullah-Shawadfi/SOC-BruteForce-Detection-Windows"
     },
+    {
+      title: "Security Operation Centre App",
+      description: "Developed a Security Operation Centre (SOC) application to simulate threat detection, incident analysis, and security monitoring processes.",
+      techniques: ["SIEM", "Threat Detection", "Incident Response", "Log Analysis", "Security Monitoring"],
+      mitre: ["T1059", "T1078", "T1562"],
+      github: "https://github.com/Abdullah-Shawadfi/Security_Operation_Centre_App.git"
+    },
   ];
 
   const certifications = [
