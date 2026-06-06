@@ -149,7 +149,7 @@ export default function Home() {
       link: "https://medium.com/@abdullmst/network-analysis-ransomware-btlo-85b5d65c2ade",
       pubDate: "June 2026",
       thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
-    },
+    }
   ];
 
   const certifications = [
@@ -159,7 +159,7 @@ export default function Home() {
     { name: "eCIR (Certified Incident Responder)", status: "Self-Study" },
     { name: "MCSA (Microsoft Certified Solutions Associate)", status: "Self-Study" },
     { name: "SANS Institute SEC450 – Blue Team Fundamentals", status: "Self-Study" },
-    { name: "SANS Institute SEC504H – Incident Response & Threat Hunting", status: "Self-Study" },
+    { name: "SANS Institute SEC504H – Incident Response & Threat Hunting", status: "Self-Study"     }
   ];
 
   return (
