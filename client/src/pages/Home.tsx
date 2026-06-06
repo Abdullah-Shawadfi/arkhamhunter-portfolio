@@ -144,6 +144,12 @@ export default function Home() {
       mitre: ["T1059", "T1078", "T1562"],
       github: "https://github.com/Abdullah-Shawadfi/Security_Operation_Centre_App.git"
     },
+    {
+      title: "Network Analysis - Ransomware (BTLO)",
+      link: "https://medium.com/@abdullmst/network-analysis-ransomware-btlo-85b5d65c2ade",
+      pubDate: "June 2026",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
+    },
   ];
 
   const certifications = [
