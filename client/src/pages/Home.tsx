@@ -91,6 +91,12 @@ export default function Home() {
       link: "https://medium.com/@abdullmst/cyberhaze-osint-mitre-2-b56bd7467e9c",
       pubDate: "May 2026",
       thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
+    },
+    {
+      title: "Network Analysis - Ransomware (BTLO)",
+      link: "https://medium.com/@abdullmst/network-analysis-ransomware-btlo-85b5d65c2ade",
+      pubDate: "June 2026",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
     }
   ]);
 
@@ -143,12 +149,6 @@ export default function Home() {
       techniques: ["SIEM", "Threat Detection", "Incident Response", "Log Analysis", "Security Monitoring"],
       mitre: ["T1059", "T1078", "T1562"],
       github: "https://github.com/Abdullah-Shawadfi/Security_Operation_Centre_App.git"
-    },
-    {
-      title: "Network Analysis - Ransomware (BTLO)",
-      link: "https://medium.com/@abdullmst/network-analysis-ransomware-btlo-85b5d65c2ade",
-      pubDate: "June 2026",
-      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663710495349/ThdPYYIuWeLWBJwB.jpg"
     }
   ];
 
